@@ -1,0 +1,113 @@
+--------------------------------------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  /Users/kailukowiak/Desktop/Uni/Econ 497/log file for assignment 2 497.log
+  log type:  text
+ opened on:  19 Nov 2017, 14:22:06
+
+. *
+. *
+. **** Part 2A - obs =50 ****
+. *
+. *
+. 
+. 
+. *Program and cleaning.
+. clear
+
+. 
+. capture program drop monte
+
+. program define monte, rclass
+  1. drop _all
+  2. set obs 50
+  3. tempvar u x1 v x2 y
+  4. gen `u'=rnormal(0,2)
+  5. gen `x1'=rnormal(2,2)
+  6. gen `v'= rnormal(0,3)
+  7. gen `x2'= 2+ `x1' + `v'
+  8. gen `y' = 1 - 0.5 * `x1' + 2 * `x2' + `u'
+  9. reg `y' `x1' `x2'
+ 10. return scalar coefB=_b[`x1']
+ 11. return scalar steB=_se[`x1']
+ 12. reg `y' `x1'
+ 13. return scalar coefD=_b[`x1']
+ 14. return scalar steD=_se[`x1']
+ 15. end
+
+. 
+. *Simulation:
+. 
+. simulate coefB=r(coefB) steB=r(steB) coefD=r(coefD) steD=r(steD), seed(12345) reps(1000) : monte
+
+      command:  monte
+        coefB:  r(coefB)
+         steB:  r(steB)
+        coefD:  r(coefD)
+         steD:  r(steD)
+
+Simulations (1000)
+----+--- 1 ---+--- 2 ---+--- 3 ---+--- 4 ---+--- 5 
+..................................................    50
+..................................................   100
+..................................................   150
+..................................................   200
+..................................................   250
+..................................................   300
+..................................................   350
+..................................................   400
+..................................................   450
+..................................................   500
+..................................................   550
+..................................................   600
+..................................................   650
+..................................................   700
+..................................................   750
+..................................................   800
+..................................................   850
+..................................................   900
+..................................................   950
+..................................................  1000
+
+. 
+. histogram coefB, normal title("Estimation of B_1, part A") name(betaA, replace)
+(bin=29, start=-1.0317736, width=.04557483)
+
+. graph save betaA "/Users/kailukowiak/Desktop/Econ 497/betaA.gph", replace
+(note: file /Users/kailukowiak/Desktop/Econ 497/betaA.gph not found)
+file /Users/kailukowiak/Desktop/Econ 497/betaA.gph could not be opened
+r(603);
+
+end of do-file
+
+r(603);
+
+. do "/var/folders/xq/b121v7892dn2gwfj__36f3pc0000gq/T//SD91503.000000"
+
+. log using "/Users/kailukowiak/Desktop/Uni/Econ 497/log file for assignment 2 497.log", replace
+log file already open
+r(604);
+
+end of do-file
+
+r(604);
+
+. do "/Users/kailukowiak/Desktop/Uni/Econ 497/Assingment-2-497-Kai.do"
+
+. log using "/Users/kailukowiak/Desktop/Uni/Econ 497/log file for assignment 2 497.log", replace
+log file already open
+r(604);
+
+end of do-file
+
+r(604);
+
+. do "/Users/kailukowiak/Desktop/Uni/Econ 497/Assingment-2-497-Kai.do"
+
+. log using "/Users/kailukowiak/Desktop/Uni/Econ 497/log file for assignment 2 497.log", replace
+log file already open
+r(604);
+
+end of do-file
+
+r(604);
+
